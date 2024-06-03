@@ -11,3 +11,9 @@ edition = "2021"
 [dev-dependencies]
 rustfmt = "0.10"
 
+[workspace.lints.clippy]
+all = { level = "deny", priority = -100 }
+restriction = { level = "deny", priority = -100 }
+pedantic = { level = "deny", priority = -100 }
+nursery = { level = "deny", priority = -100 }
+cargo = { level = "deny", priority = -100 }
