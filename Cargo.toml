@@ -7,8 +7,11 @@ edition = "2021"
 
 
 [dependencies]
+rand = "0.8.5"
+serde_json = "1.0.117"
 
 [dev-dependencies]
+criterion = "0.5.1"
 rustfmt = "0.10"
 
 [workspace.lints.clippy]
@@ -17,3 +20,7 @@ restriction = { level = "deny", priority = -100 }
 pedantic = { level = "deny", priority = -100 }
 nursery = { level = "deny", priority = -100 }
 cargo = { level = "deny", priority = -100 }
+
+[[bench]]
+name = "my_benchmarks"
+harness = false
