@@ -20,7 +20,3 @@ restriction = { level = "deny", priority = -100 }
 pedantic = { level = "deny", priority = -100 }
 nursery = { level = "deny", priority = -100 }
 cargo = { level = "deny", priority = -100 }
-
-[[bench]]
-name = "my_benchmarks"
-harness = false
