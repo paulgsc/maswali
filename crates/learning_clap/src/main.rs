@@ -1,4 +1,5 @@
 use clap::Parser;
+use learning_clap::config::Config;
 
 /// Simple program to greet a person
 #[derive(Parser, Debug)]
@@ -15,6 +16,9 @@ struct Args {
 
 fn main() {
 	let args = Args::parse();
+
+	// example of config in real world application
+	let config = Config::parse();
 
 	for _ in 0..args.count {
 		println!("Hello {}!", args.name);
