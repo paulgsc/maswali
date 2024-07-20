@@ -11,4 +11,5 @@ mod tests {
     fn case() {
         assert_eq!(compute(1, 2), 9);
     }
+    
 }

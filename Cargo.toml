@@ -1,7 +1,7 @@
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [workspace]
-members = ["crates/learning_clap", "crates/mango-simulation", "crates/rust_exercises/basic_calculator/integers"]
+members = ["crates/learning_clap", "crates/mango-simulation", "crates/rust_exercises/basic_calculator/if_else", "crates/rust_exercises/basic_calculator/integers", "crates/rust_exercises/basic_calculator/variables"]
 
 exclude = []
 
