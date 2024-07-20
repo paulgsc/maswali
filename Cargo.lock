@@ -4266,6 +4266,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "panics"
+version = "0.0.0"
+
+[[package]]
 name = "parking"
 version = "2.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
