@@ -13,6 +13,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "_while"
+version = "0.0.0"
+
+[[package]]
 name = "addr2line"
 version = "0.22.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
