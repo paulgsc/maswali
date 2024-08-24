@@ -18,12 +18,6 @@ impl Fraction {
         Fraction::new(new_numerator, new_denominator)
     }
     
-    fn substract(&self, other: &Fraction) -> Fraction {
-        let new_numerator = self.numerator * other.denominator - other.numerator * self.denominator;
-        let new_denominator = self.denominator * other.denominator;
-        Fraction::new(new_numerator, new_denominator)
-    }
-
     fn simplify(&mut self) {
         let gcd = gcd(self.numerator.abs(), self.denominator.abs());
         self.numerator /= gcd;
@@ -36,15 +30,18 @@ impl Fraction {
 }
 
 impl FromStr for Fraction {
-    type Err = ();
+    type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let parts: Vec<&str> = s.split('/').collect();
         if parts.len() != 2 {
-            return Err(());
+            return Err("invalid fraction format".to_string());
         }
-        let numerator = parts[0].parse().map_err(|_| ())?;
-        let denominator = parts[1].parse().map_err(|_| ())?;
+        let numerator = parts[0].parse().map_err(|_| "Invalid numerator")?;
+        let denominator = parts[1].parse().map_err(|_| "Invalid denominator")?;
+        if denominator == 0 {
+            return Err("Denominator cannot be zero".to_string());
+        }
         Ok(Fraction::new(numerator, denominator))
     }
 }
@@ -58,32 +55,46 @@ fn gcd(a: i32, b: i32) -> i32 {
 }
 
 fn calculate_fraction(expression: &str) -> String {
-    let tokens: Vec<&str> = expression.split_whitespace().collect();
-    let mut result = Fraction::from_str(tokens[0]).unwrap();
+    let mut result = Fraction::new(0, 1);
+    let mut current_fraction = String::new();
+    let mut current_sign = 1;
 
-
-    for chunk in tokens[1..].chunks(2) {
-        if chunk.len() != 2 {
-            break;
+    for (i, c) in expression.chars().enumerate() {
+        match c {
+            '0' ..='9' | '/' => current_fraction.push(c),
+            '+' | '-' => {
+                if !current_fraction.is_empty() || i == 0 {
+                    if let Ok(fraction) = Fraction::from_str(&current_fraction) {
+                        let signed_fraction = Fraction::new(fraction.numerator * current_sign, fraction.denominator);
+                        result = result.add(&signed_fraction);
+                        current_fraction.clear();
+                    }
+                }
+                current_sign = if c == '+' { 1 } else { -1 };
+            },
+            _ => return "Invalid character in expression".to_string(),
         }
-        let operator = chunk[0];
-        let fraction = Fraction::from_str(chunk[1]).unwrap();
+    }
+    
 
 
-        match operator {
-            "+" => result = result.add(&fraction),
-            "-" => result = result.substract(&fraction),
-            _ => panic!("Invalid operator"),
+    if !current_fraction.is_empty() {
+        if let Ok(fraction) = Fraction::from_str(&current_fraction) {
+            let signed_fraction = Fraction::new(fraction.numerator * current_sign, fraction.denominator);
+            result = result.add(&signed_fraction);
         }
     }
 
     result.simplify();
 
-    if result.denominator == 1 {
-        format!("{}/1", result.numerator)
-    } else {
+    if result.numerator == 0 {
+        "0/1".to_string()
+    } else if result.numerator > 0 {
         format!("{}/{}", result.numerator, result.denominator)
+    } else {
+        format!("-{}/{}", result.numerator.abs(), result.denominator)
     }
+
 }
 
 
@@ -120,32 +131,32 @@ mod tests {
 
     #[test]
     fn test_addition() {
-        assert_eq!(calculate_fraction("1/3 + 1/3"), "2/3");
+        assert_eq!(calculate_fraction("1/3+1/3"), "2/3");
     }
 
     #[test]
     fn test_substraction() {
-        assert_eq!(calculate_fraction("1/2 - 1/3"), "1/6");
+        assert_eq!(calculate_fraction("1/2-1/3"), "1/6");
     }
 
     #[test]
     fn test_mixed_operations() {
-        assert_eq!(calculate_fraction("1/3 - 1/2 + 1/3"), "1/6");
+        assert_eq!(calculate_fraction("1/3-1/2+1/3"), "1/6");
     }
 
     #[test]
     fn test_simplication() {
-        assert_eq!(calculate_fraction("4/6 + 2/3"), "4/3");
+        assert_eq!(calculate_fraction("4/6+2/3"), "4/3");
     }
 
     #[test]
     fn test_integer_result() {
-        assert_eq!(calculate_fraction("1/3 + 2/3"), "1/1");
+        assert_eq!(calculate_fraction("1/3+2/3"), "1/1");
     }
 
     #[test]
     fn test_negative_result() {
-        assert_eq!(calculate_fraction("1/3 - 1/2"), "-1/6");
+        assert_eq!(calculate_fraction("1/3-1/2"), "-1/6");
     }
 }
 
