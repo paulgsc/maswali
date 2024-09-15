@@ -1,0 +1,10 @@
+[package]
+name = "stack_queues_225"
+version.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+license.workspace = true
+edition.workspace = true
+
+[dependencies]

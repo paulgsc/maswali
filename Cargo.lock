@@ -3541,6 +3541,10 @@ dependencies = [
 
 [[package]]
 name = "lru"
+version = "0.0.0"
+
+[[package]]
+name = "lru"
 version = "0.7.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e999beba7b6e8345721bd280141ed958096a2e4abdf74f67ff4ce49b4b54e47a"
@@ -5303,7 +5307,7 @@ dependencies = [
  "cc",
  "libc",
  "libm",
- "lru",
+ "lru 0.7.8",
  "parking_lot 0.11.2",
  "smallvec 1.13.2",
  "spin 0.9.8",
@@ -6504,7 +6508,7 @@ dependencies = [
  "indexmap 2.2.6",
  "itertools 0.10.5",
  "log 0.4.22",
- "lru",
+ "lru 0.7.8",
  "num-traits",
  "rand 0.8.5",
  "rand_chacha 0.3.1",
@@ -6559,7 +6563,7 @@ dependencies = [
  "lazy_static",
  "libc",
  "log 0.4.22",
- "lru",
+ "lru 0.7.8",
  "mockall",
  "num_cpus",
  "num_enum 0.7.2",
@@ -7160,7 +7164,7 @@ dependencies = [
  "itertools 0.10.5",
  "lazy_static",
  "log 0.4.22",
- "lru",
+ "lru 0.7.8",
  "lz4",
  "memmap2",
  "mockall",
@@ -7869,6 +7873,10 @@ dependencies = [
  "spl-pod",
  "spl-program-error",
 ]
+
+[[package]]
+name = "stack_queues_225"
+version = "0.0.0"
 
 [[package]]
 name = "static_assertions"
