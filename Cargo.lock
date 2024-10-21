@@ -1364,6 +1364,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "car_pooling"
+version = "0.0.0"
+
+[[package]]
 name = "cc"
 version = "1.0.99"
 source = "registry+https://github.com/rust-lang/crates.io-index"
