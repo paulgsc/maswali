@@ -1,14 +1,8 @@
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [workspace]
-members = []
-
+members = ["crates/assay"]
 exclude = []
-
-# new crates created should not create their own .git
-[cargo-new]
-vcs = "none"
-
 resolver = "2"
 
 [workspace.package]
